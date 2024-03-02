@@ -37,10 +37,12 @@ def plot():
     return g
 
 
+
 @render.image
 def image():
     from pathlib import Path
 
     dir = Path(__file__).resolve().parent
-    img: ImgData = {"src": str(dir / "Adelie.jpeg"), "width": "400px"}
+    selected_species = input.species()
+    img: ImgData = {"src": str(dir / f"{selected_species}.jpeg"), "width": "400px"}
     return img
