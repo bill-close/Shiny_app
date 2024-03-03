@@ -3,41 +3,31 @@ from shiny.express import input
 from palmerpenguins import load_penguins
 import seaborn as sns
 
-ui.panel_title("A plot of the flipper length of penguins from various species")
+ui.panel_title(ui.tags.h1("Penguin data", align = "center"))
+
 
 ui.panel_sidebar(
     ui.input_select("species", "Select a species", ["Adelie", "Chinstrap", "Gentoo"]),
 )
 
-# What does this do??
-# app_ui = ui.page_fluid(ui.output_image("image"))
-
-
-# ui.input_slider("n", "N", 0, 100, 20)
-
-# @render.text
-# def txt():
-#     return f"n*2 is {input.n() * 2}"
-
-
+ui.tags.h5("A plot of the flipper length of all penguins", align = "center")
 @render.plot(alt="A plot of the penguins")
 def plot():
-    sns.set_style("whitegrid")
+    sns.set_style("white")
 
     penguins = load_penguins()
     p = penguins[penguins.species == input.species()]
 
-    g = sns.histplot(
+    graph = sns.histplot(
         x="flipper_length_mm",
         hue="species",
         data=p,
         palette=["#FF8C00","#159090","#FF6347"],
         linewidth=0.3,
     )
-    return g
+    return graph
 
-
-
+ui.tags.h5("Analysis of a particular species", align = "center")
 @render.image
 def image():
     from pathlib import Path
