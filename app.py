@@ -5,7 +5,6 @@ import seaborn as sns
 
 ui.panel_title(ui.tags.h1("Penguin data", align = "center"))
 
-
 ui.panel_sidebar(
     ui.input_select("species", "Select a species", ["Adelie", "Chinstrap", "Gentoo"]),
 )
